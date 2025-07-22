@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Typing Speed Tester</title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <style type="text/css">
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.title {
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.sentence-display {
+  font-size: 18px;
+  font-weight: 500;
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.typing-box {
+  width: 94%;
+  font-size: 16px;
+  padding: 15px;
+  border: 2px solid #0072ff;
+  border-radius: 10px;
+  resize: none;
+  transition: border-color 0.3s ease;
+}
+
+.typing-box:focus {
+  outline: none;
+  border-color: #0051b1;
+}
+
+.stats {
+  margin-top: 20px;
+}
+
+.stat-text {
+  font-size: 18px;
+  margin: 8px 0;
+  color: #333;
+}
+
+.restart-btn {
+  margin-top: 25px;
+  padding: 12px 25px;
+  background-color: #0072ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restart-btn:hover {
+  background-color: #0051b1;
+}
+
+  </style>
+</head>
+<body>
+  <div class="app-wrapper">
+    <div class="card">
+      <h1 class="title">⌨️ Typing Speed Tester</h1>
+      
+      <p id="sentence" class="sentence-display"></p>
+
+      <textarea id="inputBox" placeholder="Start typing here..." rows="4" class="typing-box"></textarea>
+
+      <div class="stats">
+        <p id="wpm" class="stat-text"></p>
+        <p id="accuracy" class="stat-text"></p>
+      </div>
+
+      <button onclick="startNewTest()" class="restart-btn">🔄 Try Again</button>
+    </div>
+  </div>
+
+  <script>
+    const sentences = [
+  "The quick brown fox jumps over the lazy dog.",
+  "Typing speed is measured in words per minute.",
+  "Practice makes a man perfect.",
+  "Stay focused and keep typing accurately.",
+  "Every skilled coder writes clean and simple code.",
+  "She sells seashells by the seashore every sunny Sunday.",
+  "Pack my box with five dozen liquor jugs.",
+  "The five boxing wizards jump quickly over the gate.",
+  "A journey of a thousand miles begins with a single keystroke.",
+  "Bright vixens jump; dozy fowl quack.",
+  "Typing without looking improves your muscle memory and confidence.",
+  "Zany wizards pluck exotic javelins from the big quilted box.",
+  "How razorback-jumping frogs can level six piqued gymnasts!",
+  "Jack quietly moved the heavy boxes to the front yard.",
+  "Fix the big problem with clever thinking and fast fingers.",
+  "Learning to type is like riding a bicycle for your fingers.",
+  "Jumping foxes quickly vex the bright and lazy dogs.",
+  "Avoid errors by typing each word slowly and correctly at first.",
+  "Speed builds over time, so type patiently and stay consistent.",
+  "Keep practicing daily to develop fast and accurate typing skills."
+];
+
+let startTime, originalText;
+
+const sentenceDisplay = document.getElementById("sentence");
+const inputBox = document.getElementById("inputBox");
+const wpmDisplay = document.getElementById("wpm");
+const accuracyDisplay = document.getElementById("accuracy");
+
+function startNewTest() {
+  // Reset everything
+  inputBox.value = "";
+  wpmDisplay.textContent = "";
+  accuracyDisplay.textContent = "";
+
+  originalText = sentences[Math.floor(Math.random() * sentences.length)];
+  sentenceDisplay.textContent = originalText;
+  startTime = null;
+}
+
+inputBox.addEventListener("input", () => {
+  if (!startTime) {
+    startTime = new Date(); // Start time when user begins typing
+  }
+
+  const typedText = inputBox.value;
+
+  if (typedText.length >= originalText.length) {
+    const endTime = new Date();
+    const timeTaken = (endTime - startTime) / 1000; // seconds
+
+    const wordCount = originalText.split(" ").length;
+    const wpm = Math.round((wordCount / timeTaken) * 60);
+
+    // Accuracy Calculation
+    let correct = 0;
+    for (let i = 0; i < originalText.length; i++) {
+      if (typedText[i] === originalText[i]) {
+        correct++;
+      }
+    }
+    const accuracy = Math.round((correct / originalText.length) * 100);
+
+    wpmDisplay.textContent = `Speed: ${wpm} WPM`;
+    accuracyDisplay.textContent = `Accuracy: ${accuracy}%`;
+  }
+});
+
+// Start the first test on load
+startNewTest();
+
+  </script>
+</body>
+</html>
