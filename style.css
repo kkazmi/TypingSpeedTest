@@ -1,0 +1,79 @@
+
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.title {
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.sentence-display {
+  font-size: 18px;
+  font-weight: 500;
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.typing-box {
+  width: 94%;
+  font-size: 16px;
+  padding: 15px;
+  border: 2px solid #0072ff;
+  border-radius: 10px;
+  resize: none;
+  transition: border-color 0.3s ease;
+}
+
+.typing-box:focus {
+  outline: none;
+  border-color: #0051b1;
+}
+
+.stats {
+  margin-top: 20px;
+}
+
+.stat-text {
+  font-size: 18px;
+  margin: 8px 0;
+  color: #333;
+}
+
+.restart-btn {
+  margin-top: 25px;
+  padding: 12px 25px;
+  background-color: #0072ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restart-btn:hover {
+  background-color: #0051b1;
+}
